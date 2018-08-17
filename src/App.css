@@ -39,6 +39,9 @@ body {
 .background-center {
   background-position: center center;
 }
+.background-bottom {
+  background-position: bottom center;
+}
 .background-no-repat {
   background-repeat: no-repeat;
 }
