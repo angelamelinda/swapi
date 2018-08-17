@@ -7,19 +7,13 @@ import Hero from '../../assets/images/starwars.jpg';
 import { RequestFetchApi } from '../../redux/Action/action_fetchapi';
 
 class Homepage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
     componentDidMount() {
         this.props.RequestFetchApi();
     }
     render() {
         return(
             <div className="page">
-                {/* <div  style={{backgroundImage:`url(${Hero})`}} className="background-bottom background-cover background-no-repeat overlay-5 overlay">
+                <div  style={{backgroundImage:`url(${Hero})`}} className="background-bottom background-cover background-no-repeat overlay-5 overlay">
                     <div className="container z-index-2 position-relative text-center pt-100 pb-100">
                         <h1 className="color-white font-starjedi text-shadow-5">Star Wars Characters</h1>
                     </div>
@@ -33,10 +27,7 @@ class Homepage extends Component {
                             <People />
                         </div>
                     </div>
-                </div> */}
-                {
-                    console.log(this.props.film)
-                }
+                </div>
             </div>  
         )
     }
@@ -45,11 +36,26 @@ class Homepage extends Component {
 const mapStateToProps = (state) => {
     return {
         film: state.Film.film,
+        filmIsUpdating: state.Film.isUpdating,
+        filmIsUpdated: state.Film.isUpdated,
         people: state.People.people,
+        peopleIsUpdating: state.People.isUpdating,
+        peopleIsUpdated: state.People.isUpdated,
         planet: state.Planet.planet,
+        planetIsUpdating: state.Planet.isUpdating,
+        planetIsUpdated: state.Planet.isUpdated,
         species: state.Species.species,
+        speciesIsUpdating: state.Species.isUpdating,
+        speciesIsUpdated: state.Species.isUpdated,
         starship: state.Starship.starship,
+        starshipIsUpdating: state.Starship.isUpdating,
+        starshipIsUpdated: state.Starship.isUpdated,
         vehicle: state.Vehicle.vehicle,
+        vehicleIsUpdating: state.Vehicle.isUpdating,
+        vehicleIsUpdated: state.Vehicle.isUpdated,
+        filter: state.Filter.filter,
+        isFiltering: state.Filter.isFiltering,
+        isFiltered: state.Filter.isFiltered
     }
   }
   const matchDispatchToProps = (dispatch) => {

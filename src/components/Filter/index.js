@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { RequestFilterPlanet, RequestFilterReset } from '../../redux/Action/action_filter';
 import './style.css';
 
 class Filter extends Component {
@@ -10,11 +11,27 @@ class Filter extends Component {
             filterOpen: false
         }
         this.toggleFilter = this.toggleFilter.bind(this);
+        this.handleFilter = this.handleFilter.bind(this);
     }
     toggleFilter() {
         this.setState(prevState => ({
             filterOpen: !prevState.filterOpen
         }))
+    }
+    handleFilter() {
+        let selected = Array.from(document.querySelectorAll(".list-filter input[type='checkbox']:checked")),
+            selectedPlanet = [];
+
+        for (let i in selected) {
+            let value = selected[i].getAttribute('value');
+            selectedPlanet.push(value);
+        }  
+
+        if(selected.length) {
+            this.props.RequestFilterPlanet(selectedPlanet, this.props.people);
+        } else {
+            this.props.RequestFilterReset();
+        }
     }
     render() { 
         return (
@@ -24,7 +41,7 @@ class Filter extends Component {
                     {
                         (this.props.planetIsUpdated == true) ? (
                             Object.keys(this.props.planet).map((key,id) => (
-                                <li key={key}><label><input type="checkbox" value={this.props.planet[key].name.toLowerCase().replace(' ','-')}/> {this.props.planet[key].name}</label></li>
+                                <li key={key}><label><input type="checkbox" value={this.props.planet[key].url} onChange={this.handleFilter}/> {this.props.planet[key].name}</label></li>
                             ))
                         ) : (<p className="mb-0 color-white">Please wait...</p>)
                     }
@@ -37,13 +54,14 @@ class Filter extends Component {
 const mapStateToProps = (state) => {
     return {
         planet: state.Planet.planet,
-        planetIsUpdating: state.Planet.isUpdating,
-        planetIsUpdated: state.Planet.isUpdated
+        planetIsUpdated: state.Planet.isUpdated,
+        people: state.People.people
     }
   }
   const matchDispatchToProps = (dispatch) => {
     return {
-        
+        RequestFilterPlanet : (selected, people) => dispatch(RequestFilterPlanet(selected, people)),
+        RequestFilterReset : () => dispatch(RequestFilterReset())
     }
   }
   
