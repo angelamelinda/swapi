@@ -1,0 +1,29 @@
+.list-filter {
+    background-color: #171a13;
+    color: #fff;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-height: 0;
+    transition: all .4s ease;
+    position: absolute;
+    width: calc(100% - 30px);
+}
+
+.filter-tools {
+    overflow:hidden;
+    border: 1px solid #fff;
+    border-radius: 25px;
+    transition: all .4s ease;
+}
+
+.filter-tools.opened {
+    border-radius: 0;
+}
+
+.filter-tools.opened .list-filter {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    max-height: 200px;
+}

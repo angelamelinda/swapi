@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'Star Jedi Hollow';
+    src: url('StarJediHollow.eot');
+    src: url('StarJediHollow.eot?#iefix') format('embedded-opentype'),
+        url('StarJediHollow.woff2') format('woff2'),
+        url('StarJediHollow.woff') format('woff'),
+        url('StarJediHollow.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Star Jedi Rounded';
+    src: url('StarJediRounded.eot');
+    src: url('StarJediRounded.eot?#iefix') format('embedded-opentype'),
+        url('StarJediRounded.woff2') format('woff2'),
+        url('StarJediRounded.woff') format('woff'),
+        url('StarJediRounded.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Star Jedi';
+    src: url('StarJedi.eot');
+    src: url('StarJedi.eot?#iefix') format('embedded-opentype'),
+        url('StarJedi.woff2') format('woff2'),
+        url('StarJedi.woff') format('woff'),
+        url('StarJedi.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
