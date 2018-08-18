@@ -25,9 +25,9 @@ export function RequestFetchApi() {
                         processedFilmResponses.push(film);
                     })
                 })
-                dispatch({type:'PEOPLE_UPDATED', payload:processedFilmResponses});
+                dispatch({type:'FILM_UPDATED', payload:processedFilmResponses});
             }).catch(() => {
-                dispatch({type:'PEOPLE_UPDATE_FAILED'});
+                dispatch({type:'FILM_UPDATE_FAILED'});
             })
         })
 
