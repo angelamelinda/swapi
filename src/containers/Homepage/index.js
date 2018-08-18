@@ -4,12 +4,8 @@ import { connect } from 'react-redux';
 import Filter from '../../components/Filter';
 import People from '../../components/People';
 import Hero from '../../assets/images/starwars.jpg';
-import { RequestFetchApi } from '../../redux/Action/action_fetchapi';
 
 class Homepage extends Component {
-    componentDidMount() {
-        this.props.RequestFetchApi();
-    }
     render() {
         return(
             <div className="page">
@@ -60,7 +56,7 @@ const mapStateToProps = (state) => {
   }
   const matchDispatchToProps = (dispatch) => {
     return {
-      RequestFetchApi : () => dispatch(RequestFetchApi())
+        
     }
   }
   

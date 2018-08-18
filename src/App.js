@@ -1,23 +1,61 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import Store from './redux/Store';
+import { RequestFetchApi } from './redux/Action/action_fetchapi';
 import Homepage from './containers/Homepage';
+import DetailPeople from './containers/DetailPeople';
 import './App.css';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.RequestFetchApi();
+  }
   render() {
     return (
-      <Provider store={Store}>
-        <Router>
+      <Router>
         <div className="App">
-          <Route exact path="/" component={Homepage}/>
+          <Switch>
+            <Route exact path="/" component={Homepage}/>
+            <Route path="/people/:name" component={DetailPeople} exact/>
+            <Redirect to="/404" />
+          </Switch>  
         </div>
-      </Router>
-      </Provider>    
+      </Router> 
     );
   }
 }
 
-export default App;
+
+const mapStateToProps = (state) => {
+  return {
+      film: state.Film.film,
+      filmIsUpdating: state.Film.isUpdating,
+      filmIsUpdated: state.Film.isUpdated,
+      people: state.People.people,
+      peopleIsUpdating: state.People.isUpdating,
+      peopleIsUpdated: state.People.isUpdated,
+      planet: state.Planet.planet,
+      planetIsUpdating: state.Planet.isUpdating,
+      planetIsUpdated: state.Planet.isUpdated,
+      species: state.Species.species,
+      speciesIsUpdating: state.Species.isUpdating,
+      speciesIsUpdated: state.Species.isUpdated,
+      starship: state.Starship.starship,
+      starshipIsUpdating: state.Starship.isUpdating,
+      starshipIsUpdated: state.Starship.isUpdated,
+      vehicle: state.Vehicle.vehicle,
+      vehicleIsUpdating: state.Vehicle.isUpdating,
+      vehicleIsUpdated: state.Vehicle.isUpdated,
+      filter: state.Filter.filter,
+      isFiltering: state.Filter.isFiltering,
+      isFiltered: state.Filter.isFiltered
+  }
+}
+const matchDispatchToProps = (dispatch) => {
+  return {
+    RequestFetchApi : () => dispatch(RequestFetchApi())
+  }
+}
+
+export default connect(mapStateToProps,matchDispatchToProps)(App);
