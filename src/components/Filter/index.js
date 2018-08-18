@@ -39,7 +39,7 @@ class Filter extends Component {
                 <h4 className="font-starjedi-rounded text-center color-white pt-3 mb-3 cursor-pointer" onClick={this.toggleFilter}>Filter Planets</h4>
                 <ul className="list-filter list-unstyled mb-0 overflow-y-scroll">
                     {
-                        (this.props.planetIsUpdated == true) ? (
+                        (this.props.planetIsUpdated && this.props.peopleIsUpdated) ? (
                             Object.keys(this.props.planet).map((key,id) => (
                                 <li key={key}><label><input type="checkbox" value={this.props.planet[key].url} onChange={this.handleFilter}/> {this.props.planet[key].name}</label></li>
                             ))
@@ -55,7 +55,8 @@ const mapStateToProps = (state) => {
     return {
         planet: state.Planet.planet,
         planetIsUpdated: state.Planet.isUpdated,
-        people: state.People.people
+        people: state.People.people,
+        peopleIsUpdated: state.People.isUpdated
     }
   }
   const matchDispatchToProps = (dispatch) => {
