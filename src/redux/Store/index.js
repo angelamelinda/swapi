@@ -4,9 +4,10 @@ import thunkMiddleware from "redux-thunk";
 
 import AllReducer from '../Reducer';
 import { RequestFetchApi } from '../Action/action_fetchapi';
+
 const Store = createStore(AllReducer,
   applyMiddleware(thunkMiddleware,
-    logger
+    // logger
   )
 );
 
