@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 
 import Homepage from './containers/Homepage';
 import DetailPeople from './containers/DetailPeople';
+import NotFound from './containers/NotFound';
+import ScrollToTop from './components/ScrollToTop';
+
 import './App.css';
 
 class App extends Component {
@@ -11,11 +14,14 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Switch>
-            <Route exact path="/" component={Homepage}/>
-            <Route path="/people/:name" component={DetailPeople} exact/>
-            <Redirect to="/404" />
-          </Switch>  
+          <ScrollToTop>
+            <Switch>
+              <Route exact path="/" component={Homepage}/>
+              <Route path="/people/detail" component={DetailPeople} exact/>
+              <Route path="/notfound" component={NotFound}/>
+              <Redirect to="/notfound" />
+            </Switch>
+          </ScrollToTop>
         </div>
       </Router> 
     );
@@ -25,27 +31,6 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      film: state.Film.film,
-      filmIsUpdating: state.Film.isUpdating,
-      filmIsUpdated: state.Film.isUpdated,
-      people: state.People.people,
-      peopleIsUpdating: state.People.isUpdating,
-      peopleIsUpdated: state.People.isUpdated,
-      planet: state.Planet.planet,
-      planetIsUpdating: state.Planet.isUpdating,
-      planetIsUpdated: state.Planet.isUpdated,
-      species: state.Species.species,
-      speciesIsUpdating: state.Species.isUpdating,
-      speciesIsUpdated: state.Species.isUpdated,
-      starship: state.Starship.starship,
-      starshipIsUpdating: state.Starship.isUpdating,
-      starshipIsUpdated: state.Starship.isUpdated,
-      vehicle: state.Vehicle.vehicle,
-      vehicleIsUpdating: state.Vehicle.isUpdating,
-      vehicleIsUpdated: state.Vehicle.isUpdated,
-      filter: state.Filter.filter,
-      isFiltering: state.Filter.isFiltering,
-      isFiltered: state.Filter.isFiltered
   }
 }
 const matchDispatchToProps = (dispatch) => {
