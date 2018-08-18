@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { RequestFetchApi } from './redux/Action/action_fetchapi';
 import Homepage from './containers/Homepage';
 import DetailPeople from './containers/DetailPeople';
 import './App.css';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.RequestFetchApi();
-  }
   render() {
     return (
       <Router>
@@ -54,7 +50,6 @@ const mapStateToProps = (state) => {
 }
 const matchDispatchToProps = (dispatch) => {
   return {
-    RequestFetchApi : () => dispatch(RequestFetchApi())
   }
 }
 
