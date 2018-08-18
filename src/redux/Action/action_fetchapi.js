@@ -32,7 +32,8 @@ export function RequestFetchApi() {
             "people",
             "planet",
             "species",
-            "vehicle"
+            "vehicle",
+            "starship"
         ]
 
         dataNames.map( (data) => {
