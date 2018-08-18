@@ -1,10 +1,6 @@
 export function RequestFilterPlanet(selected, people) {
     return dispatch => {
         dispatch({type:'FILTERING'});
-        console.log(selected,'selected');
-        console.log('wo');
-        console.log(people);
-
         let resultFilter = [];
         Object.keys(people).filter((key) => {
             selected.map((selectedItem) => {
