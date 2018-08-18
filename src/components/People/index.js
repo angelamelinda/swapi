@@ -17,13 +17,15 @@ class People extends Component {
             <div className="row">
                 {
                     (this.props.peopleIsUpdated == true) ? (
-                        Object.keys(data).map((key) => (
-                            <div key={key} className="col-12 color-white">
-                                <Link to={(data[key].name).toLowerCase().replace(' ','-')}>
-                                 {data[key].name}
-                                </Link>
-                            </div>
-                        ))
+                        (data.length > 0) ? (
+                            Object.keys(data).map((key) => (
+                                <div key={key} className="col-12 color-white">
+                                    <Link to={'people/'+(data[key].name).toLowerCase().replace(' ','-')}>
+                                        {data[key].name}
+                                    </Link>
+                                </div>
+                            ))
+                        ) :  (<p className="mb-0 color-white">The people is not exist...</p>)
                     ) : (<p className="mb-0 color-white">Please wait...</p>)
                 }
             </div>
