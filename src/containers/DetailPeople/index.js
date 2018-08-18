@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import queryString  from 'query-string';
+import querystring  from 'querystring';
 
 import Hero from '../../assets/images/starwars.jpg';
 
@@ -30,7 +30,7 @@ class DetailPeople extends Component {
             peopleStarship = [];
         if(this.props.peopleIsUpdated) {
             // Match the path with the this.props.people to get the people data
-            let path = queryString.parse(this.props.location.search).name;
+            let path = querystring.parse(this.props.location.search)['?name'];
             let idx = Object.keys(this.props.people).filter((key) => {
                 let name = this.props.people[key].name;
                 return name == path
@@ -62,9 +62,6 @@ class DetailPeople extends Component {
                         <h1 className="color-white font-starjedi text-shadow-5">Star Wars Character</h1>
                     </div>
                 </div>
-                {
-                    console.log(this.props)
-                }
                 {
                     this.props.peopleIsUpdated && (
                         <div className="container pt-5 pb-5 color-white">
