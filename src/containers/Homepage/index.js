@@ -13,8 +13,7 @@ class Homepage extends Component {
             filterChange: false,
             hasMore: true,
             iteration: 1,
-            perScroll: 10, 
-            selectedFilter: []
+            perScroll: 10
         }
         this.handleFilter = this.handleFilter.bind(this);
         this.onScroll = this.onScroll.bind(this);
@@ -22,22 +21,25 @@ class Homepage extends Component {
     handleFilter() {
         let selected = Array.from(document.querySelectorAll(".list-filter input[type='checkbox']:checked")),
             selectedPlanet = [];
-
+        // Get all the selected values after the checkbox is checked
         for (let i in selected) {
             let value = selected[i].getAttribute('value');
             selectedPlanet.push(value);
         }  
         if(selected.length) {
+            // the list is checked, then dispatch RequestFilterPlanet
             this.props.RequestFilterPlanet(selectedPlanet, this.props.people);
         } else {
+            // the list is not checked at all, then dispatch RequestFilterReset to reset the filter data and the filter status (isFiltered & isFiltering)
             this.props.RequestFilterReset();
         }
+        // Tell to other, if the checkbox is checked right now
         this.setState({
-            filterChange: true,
-            selectedFilter: selectedPlanet
+            filterChange: true
         })
         
-        if(this.state.filterChange == true && this.props.filter.length > 10) {
+        if(this.state.filterChange && this.props.filter.length > 10) {
+            // Reset the infinite scroll if the checkbox is checked right now
             this.setState({
                 hasMore: true,
                 iteration: 1
@@ -49,7 +51,8 @@ class Homepage extends Component {
             windowScrollY = window.scrollY,
             documentHeight = document.body.offsetHeight,
             data, statusUpdate;
-
+        // Check if filter is active,
+        // then will use data from filter
         if(this.props.isFiltered) {
             data = this.props.filter;
             statusUpdate = this.props.isFiltered;
@@ -57,10 +60,14 @@ class Homepage extends Component {
             data = this.props.people;
             statusUpdate = this.props.peopleIsUpdated
         }
+        // Check the window bottom position is equal or more than the document height and 
+        // is there still have data that need to be displayed
+        // then increase the increment
         if(Math.ceil(windowScrollY + windowHeight) >= Math.ceil(documentHeight) && this.state.hasMore) {
             this.setState((prevState) => ({
                 iteration: prevState.iteration + 1
             }))
+            // Check if all data already showed then disable to scroll down again and reset the iteration to 1
             if(statusUpdate && data.length < (this.state.iteration*this.state.perScroll)) {
                 this.setState({
                     hasMore: false,
@@ -68,6 +75,7 @@ class Homepage extends Component {
                 })
             }
         } else {
+            // Reset the filterChange 
             this.setState({
                 filterChange: false
             })
@@ -93,7 +101,7 @@ class Homepage extends Component {
                 <div className="container pt-5 pb-5">
                     <div className="row">
                         <div className="col-xl-3 col-lg-4 col-md-5 col-12 order-md-2">
-                            <Filter handleFilter={this.handleFilter} selectedFilter={this.state.selectedFilter}/>
+                            <Filter handleFilter={this.handleFilter}/>
                         </div>
                         <div className="col-xl-9 col-lg-8 col-md-7 col-12 order-md-1">
                             <People iteration={this.state.iteration} perScroll={this.state.perScroll} hasMore={this.state.hasMore}/>

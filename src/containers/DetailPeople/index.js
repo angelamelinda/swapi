@@ -29,14 +29,16 @@ class DetailPeople extends Component {
             peopleSpecies = [],
             peopleStarship = [];
         if(this.props.peopleIsUpdated) {
+            // Match the path with the this.props.people to get the people data
             let path = queryString.parse(this.props.location.search).name;
             let idx = Object.keys(this.props.people).filter((key) => {
                 let name = this.props.people[key].name;
                 return name == path
             })
             if(idx.length != 0) {
+                // if the people is exist, 
+                // then get the film(s), species, vehicle(s), starship(s), planet data
                 people = this.props.people[idx];
-                
                 peopleFilm = this.matchData(this.props.film, people.films);
                 peopleSpecies = this.matchData(this.props.species, people.species);
                 peopleVehicle = this.matchData(this.props.vehicle, people.vehicles);
@@ -48,11 +50,11 @@ class DetailPeople extends Component {
                     }
                 })
             } else {
+                // if the people is not exist, then redirect to page 404
                 return <Redirect to="/notfound" />
             }
         } 
-
-        
+      
         return(
             <div className="page">
                 <div style={{backgroundImage:`url(${Hero})`}} className="background-bottom background-cover background-no-repeat overlay-5 overlay">
@@ -61,9 +63,12 @@ class DetailPeople extends Component {
                     </div>
                 </div>
                 {
+                    console.log(this.props)
+                }
+                {
                     this.props.peopleIsUpdated && (
                         <div className="container pt-5 pb-5 color-white">
-                            <button className="mb-4" onClick={this.props.history.goBack}>Back</button>
+                            <button className="mb-4 cursor-pointer" onClick={this.props.history.goBack}>Back</button>
                             <div className="row justify-content-center mb-3">
                                 <div className="col-lg-4 col-6">
                                     <p className="mb-0 font-starjedi border-bottom border-top pt-3 pb-3">Character Name</p>

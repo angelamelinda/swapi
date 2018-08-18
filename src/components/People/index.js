@@ -5,12 +5,19 @@ import { Link } from 'react-router-dom';
 class People extends Component {
     render() { 
         let data;
-
+        // Check if filter is active,
+        // then will use data from filter
         if(this.props.isFiltered) {
             data = this.props.filter;
         } else {
             data = this.props.people;
         }
+        // 10 is the minimal of the data length to have infinite scroll
+        // Check if :
+        // - the data length is more than 10 and
+        // - is there still have data that need to be displayed ?
+        // If yes :
+        // - it will slice the data from 0 to (iteration*10)
         if(data.length > 10 && this.props.hasMore) {
             data = data.slice(0, (this.props.iteration * this.props.perScroll));
         }
