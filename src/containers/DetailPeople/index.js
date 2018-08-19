@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import querystring  from 'querystring';
 
+import './style.css';
 import Hero from '../../assets/images/starwars.jpg';
 
 class DetailPeople extends Component {
